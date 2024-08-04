@@ -8,10 +8,15 @@ import { useNavigate } from 'react-router-dom';
 const StudentList = () => {
     const [students, setStudents] = useState([]);
     const navigate = useNavigate();
-
+    const token = localStorage.getItem('token');
     useEffect(() => {
         const fetchStudents = async () => {
-            const response = await fetch('http://localhost:5000/api/students/all');
+            const response = await fetch('http://localhost:5000/api/students/all',{
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json'
+                  }
+            });
             const data = await response.json();
             setStudents(data);
         };

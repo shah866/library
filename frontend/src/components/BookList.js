@@ -9,10 +9,16 @@ import { useNavigate } from 'react-router-dom';
 const BookList = () => {
     const [books, setBooks] = useState([]);
     const navigate = useNavigate();
+    const token = localStorage.getItem('token');
 
     useEffect(() => {
         const fetchBooks = async () => {
-            const response = await fetch('http://localhost:5000/api/books/all');
+            const response = await fetch('http://localhost:5000/api/books/all',{
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json'
+                  }
+            });
             const data = await response.json();
             setBooks(data);
         };

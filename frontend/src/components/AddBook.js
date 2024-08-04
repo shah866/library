@@ -21,10 +21,11 @@ const AddBook = () => {
        
       };
 
-
+      const token = localStorage.getItem('token');
     const onFileChange = e => {
         const file = e.target.files[0];
         const reader = new FileReader();
+        
         reader.onloadend = () => {
             setFormData({ ...formData, image: reader.result });
         };
@@ -38,6 +39,7 @@ const AddBook = () => {
             const response = await fetch('http://localhost:5000/api/books/add', {
                 method: 'POST',
                 headers: {
+                    'Authorization': `Bearer ${token}`,
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify(formData)

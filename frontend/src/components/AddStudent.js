@@ -11,7 +11,7 @@ const AddStudent = () => {
     });
     const [message, setMessage] = useState('');
     const navigate = useNavigate();
-
+    const token = localStorage.getItem('token');
     const onChange = e => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
@@ -27,6 +27,7 @@ const AddStudent = () => {
             const response = await fetch('http://localhost:5000/api/students/add', {
                 method: 'POST',
                 headers: {
+                    'Authorization': `Bearer ${token}`,
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify(formData)
