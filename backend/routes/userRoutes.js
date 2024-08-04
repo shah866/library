@@ -5,7 +5,7 @@ const router = express.Router();
 
 router.route('/signup').post(authController.register);
 
-// Login route
+
 router.post('/login', authController.login);
 
 router.get('/confirm/:token', authController.confirmEmail);

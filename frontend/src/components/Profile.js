@@ -1,14 +1,21 @@
 import pic from '../assets/pic.png'; 
 import React, { useState} from 'react';
+import Sidebar from './Sidebar';
+import Header from './Header';
+import { useNavigate } from 'react-router-dom';
 import './Profile.css';
 import Logout from './Logout';
 
 const Profile = () => {
+    const navigate = useNavigate();
+    const goBack = () => {
+        navigate('/bookList');
+    };
     const user={
         firstName: localStorage.getItem('firstName'),
         lastName: localStorage.getItem('lastName'),
         email: localStorage.getItem('email'),
-        isConfirmed: localStorage.getItem('isConfirmed')
+        isConfirmed: localStorage.getItem('isConfirmed') 
     };
 
     const [message, setMessage] = useState('');
@@ -30,9 +37,12 @@ console.log(user);
             setMessage('An error occurred while resending the confirmation email.');
         }
     };
-
+   
     return (
-      
+        <div className="appp">
+        <Sidebar />
+        <div className="main-contentt">
+            <Header />
         
         <div className="profile-container">
            
@@ -55,8 +65,12 @@ console.log(user);
                 
               <Logout></Logout>
             </div>
+            {/* <button className="back-button" onClick={goBack}>
+                →
+            </button> */}
         </div>
-     
+        </div>
+        </div>
     );
 };
 

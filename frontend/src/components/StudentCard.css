@@ -1,0 +1,27 @@
+/* StudentCard.css */
+.student-card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 16px;
+    margin: 10px;
+    width: 300px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    transition: transform 0.2s;
+  }
+  
+  .student-card:hover {
+    transform: scale(1.05);
+  }
+  
+  .student-card h3 {
+    margin: 0;
+    font-size: 18px;
+    color: #333;
+  }
+  
+  .student-card p {
+    margin: 4px 0;
+    color: #666;
+  }
+  

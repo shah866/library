@@ -41,7 +41,8 @@ const Login = () => {
                const userId=localStorage.getItem('userId')
                 setMessage('Login successful');
                 
-                navigate(`/profiles/${userId}`);
+                //navigate(`/profiles/${userId}`);
+                navigate('/bookList');
             } else {
                 setMessage(data.message);
             }

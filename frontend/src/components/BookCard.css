@@ -1,0 +1,28 @@
+.book-card {
+    background: white;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+    display: flex;
+    margin: 20px;
+    width: 300px;
+  }
+  
+  .book-image {
+    width: 100px;
+    height: 150px;
+    object-fit: cover;
+  }
+  
+  .book-details {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .book-details p {
+    margin: 5px 0;
+  }
+  
+ 
+  

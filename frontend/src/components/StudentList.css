@@ -1,0 +1,38 @@
+/* StudentList.css */
+.appp {
+    display: flex;
+  }
+  
+  .main-contentt {
+    flex: 1;
+    padding: 20px;
+  }
+  
+  .student-section {
+    margin-top: 20px;
+  }
+  
+  .student-list {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .add-student-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 60px;
+    height: 60px;
+    border: none;
+    border-radius: 50%;
+    background-color: #ff5733;
+    color: white;
+    font-size: 30px;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  }
+  
+  .add-student-button:hover {
+    background-color: #c44129;
+  }
+  

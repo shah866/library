@@ -1,0 +1,32 @@
+.sidebar {
+    width: 200px;
+    background: linear-gradient(to bottom, #fff, #e6e6e6);
+    padding: 20px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    height:100vh ;
+  }
+  
+  .sidebar-header h1 {
+    font-size: 24px;
+    color: #ff5733;
+  }
+  
+  .sidebar-menu {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .sidebar-menu li {
+    padding: 10px 0;
+    cursor: pointer;
+    color: #333;
+  }
+  
+
+  
+  .sidebar-menu li a {
+    text-decoration: none;
+    color: #333;
+  }
+ 
+  

@@ -1,0 +1,35 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #f8f8f8;
+  border-bottom: 1px solid #ddd;
+}
+
+.date-time {
+  display: flex;
+  flex-direction: column;
+}
+
+.date, .time {
+  font-size: 14px;
+  color: #333;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+}
+
+.user-pic {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.user-name {
+  font-size: 14px;
+  color: #333;
+}
