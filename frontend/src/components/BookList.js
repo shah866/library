@@ -33,6 +33,7 @@ const BookList = () => {
     navigate('/books');
    
   };
+  const availableBooks = books.filter(book => !book.isBorrowed);
     return (
         <div className="app">
           <Sidebar></Sidebar>
@@ -42,9 +43,13 @@ const BookList = () => {
               <h2>Books</h2>
               <SearchBar />
               <div className="book-list">
-                {books.map((book) => (
-                  <BookCard key={book.id} book={book} />
-                ))}
+              {availableBooks.length > 0 ? (
+                availableBooks.map((book) => (
+                    <BookCard key={book._id} book={book} />
+                ))
+            ) : (
+                <p>No books available</p>
+            )}
               </div>
               <button className="add-book-button" onClick={add}>
           +

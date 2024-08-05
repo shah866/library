@@ -1,6 +1,7 @@
 import React from 'react';
 import { NavLink ,  useLocation } from 'react-router-dom';
 import './Sidebar.css';
+import Logout from './Logout';
 
 const Sidebar = () => {
   const location = useLocation();
@@ -20,7 +21,7 @@ const Sidebar = () => {
         </li>
         <br></br>
         <li>
-          <NavLink to="/borrowed-books" >Borrowed Books</NavLink>
+          <NavLink to="/borrowed-books"  style={{ color: location.pathname === '/borrowed-books' ? '#ff5733' : '#333' }} >Borrowed Books</NavLink>
         </li>
         <br></br>
         <li>
@@ -30,10 +31,10 @@ const Sidebar = () => {
         <li >
           <NavLink to="/studentList"  style={{ color: location.pathname === '/studentList' ? '#ff5733' : '#333' }} >Students</NavLink>
         </li>
-        <br></br>
-        <li>
-          <NavLink to="/monthly-subscription" >Monthly subscription fees</NavLink>
-        </li>
+      <br></br>
+      <br></br>
+      <hr></hr>
+      <Logout></Logout>
       </ul>
     </div>
   );

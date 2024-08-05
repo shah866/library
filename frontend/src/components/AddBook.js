@@ -48,6 +48,7 @@ const AddBook = () => {
             const data = await response.json();
             if (response.ok) {
                 setMessage('Book added successfully');
+                alert("Book added successfully ");
                 navigate('/bookList');
         
             } else {

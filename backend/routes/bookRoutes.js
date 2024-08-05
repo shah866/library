@@ -8,4 +8,8 @@ router.post('/add', verifyToken, bookController.addBook);
 // Route to get all books
 router.get('/all', verifyToken, bookController.getAllBooks);
 
+router.post('/borrow', verifyToken, bookController.borrowBook);
+
+router.get('/borrowed', verifyToken, bookController.getAllBorrowedBooks);
+
 module.exports = router;

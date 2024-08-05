@@ -10,9 +10,9 @@ const Logout = () => {
   };
 
   return (
-    <button onClick={handleLogout}  >
+    <p onClick={handleLogout} style={{cursor: "pointer"}}  >
       Logout
-    </button>
+    </p>
   );
 };
 

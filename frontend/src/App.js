@@ -9,7 +9,9 @@ import AddBook from './components/AddBook';
 import BookList from './components/BookList';
 import AddStudent from './components/AddStudent';
 import StudentList from './components/StudentList';
-
+import BorrowBook from './components/BorrowBook';
+import BorrowedBooks from './components/BorrowedBooks';
+// import Fees from './components/Fees';
 
 const App = () => {
     return (
@@ -26,6 +28,11 @@ const App = () => {
       <Route path="/students" element={<ProtectedRoute element={<AddStudent  />} />} />
       
       <Route path="/studentList" element={<ProtectedRoute element={<StudentList />} />} />
+      
+      <Route path="/borrow" element={<ProtectedRoute element={<BorrowBook />} />} />
+      <Route path="/borrowed-books" element={<ProtectedRoute element={<BorrowedBooks />} />} />
+      {/* <Route path="/monthly-subscription" element={<ProtectedRoute element={<Fees />} />} /> */}
+     
       </Routes>
     );
 };

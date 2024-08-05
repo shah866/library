@@ -9,4 +9,6 @@ router.post('/add', verifyToken, studentController.addStudent);
 // Get all students
 router.get('/all', verifyToken, studentController.getAllStudents);
 
+router.post('/addPayment', verifyToken, studentController.addPayment);
+
 module.exports = router;

@@ -63,7 +63,7 @@ console.log(user);
                 {message && <p className="profile-message">{message}</p>}
                 <br></br>
                 
-              <Logout></Logout>
+              {/* <Logout></Logout> */}
             </div>
             {/* <button className="back-button" onClick={goBack}>
                 →

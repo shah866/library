@@ -24,4 +24,14 @@
     margin: 4px 0;
     color: #666;
   }
+  button {
+    margin-top: 10px;
+}
+
+
+
+.last-payment-info {
+    margin-top: 10px;
+    font-weight: bold;
+}
   

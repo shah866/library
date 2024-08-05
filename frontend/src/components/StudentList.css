@@ -1,4 +1,4 @@
-/* StudentList.css */
+
 .appp {
     display: flex;
   }
@@ -35,4 +35,5 @@
   .add-student-button:hover {
     background-color: #c44129;
   }
+  
   

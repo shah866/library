@@ -1,33 +1,35 @@
-import React, { useState } from 'react';
+// components/BorrowBook.js
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import './AddStudent.css';
 
-const AddStudent = () => {
+const BorrowBook = () => {
     const [formData, setFormData] = useState({
-        firstName: '',
-        lastName: '',
+        title: '',
+        author: '',
         email: '',
-        enrollmentNumber: '',
+        enrollmentNumber: ''
     });
+    const [books, setBooks] = useState([]);
     const [message, setMessage] = useState('');
     const navigate = useNavigate();
-    const token = localStorage.getItem('token');
+    const goback = () => {
+        navigate('/borrowed-books');
+       
+      };
+    
+
     const onChange = e => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
-    };
-
-    const goBack = () => {
-        navigate('/studentList');
     };
 
     const onSubmit = async e => {
         e.preventDefault();
 
         try {
-            const response = await fetch('http://localhost:5000/api/students/add', {
+            const response = await fetch('http://localhost:5000/api/books/borrow', {
                 method: 'POST',
                 headers: {
-                    'Authorization': `Bearer ${token}`,
+                    'Authorization': `Bearer ${localStorage.getItem('token')}`,
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify(formData)
@@ -35,9 +37,9 @@ const AddStudent = () => {
 
             const data = await response.json();
             if (response.ok) {
-                setMessage('Student added successfully');
-                alert("Student added successfully");
-                navigate('/studentList');
+                setMessage('Book borrowed successfully');
+                alert("Book borrowed successfully ");
+                 navigate('/borrowed-books');
             } else {
                 setMessage(data.message);
             }
@@ -49,31 +51,32 @@ const AddStudent = () => {
     return (
         <div className="container">
             <form className="form" onSubmit={onSubmit}>
-                <h2 className="title">Add Student</h2>
+                <h2 className="title">Borrow Book</h2>
                 <div className="input-container">
-                    <label>First Name:</label>
-                    <input type="text" name="firstName" value={formData.firstName} onChange={onChange} required />
+                    <label> Book Title:</label>
+                    <input type="text" name="title" value={formData.title} onChange={onChange} required />
                 </div>
                 <div className="input-container">
-                    <label>Last Name:</label>
-                    <input type="text" name="lastName" value={formData.lastName} onChange={onChange} required />
+                    <label> Book Author:</label>
+                    <input type="text" name="author" value={formData.author} onChange={onChange} required />
                 </div>
                 <div className="input-container">
-                    <label>Email:</label>
+                    <label> Student Email:</label>
                     <input type="email" name="email" value={formData.email} onChange={onChange} required />
                 </div>
                 <div className="input-container">
-                    <label>Enrollment Number:</label>
+                    <label> Student Enrollment Number:</label>
                     <input type="text" name="enrollmentNumber" value={formData.enrollmentNumber} onChange={onChange} required />
                 </div>
-                <button className="button" type="submit">Add Student</button>
-                {message && <p className="message">{message}</p>}
+                <button className="button" type="submit">Borrow Book</button>
+                {message ==='Book borrowed successfully' ?  <p style={{color:"green", marginTop: "1rem",
+    textAlign: "center"}}>{message}</p> : <p className="message">{message}</p>}
             </form>
-            <button className="back-button" onClick={goBack}>
-                →
-            </button>
+            <button className="add-book-button" onClick={goback}>
+            →	
+        </button>
         </div>
     );
 };
 
-export default AddStudent;
+export default BorrowBook;

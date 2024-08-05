@@ -9,23 +9,39 @@ const StudentList = () => {
     const [students, setStudents] = useState([]);
     const navigate = useNavigate();
     const token = localStorage.getItem('token');
+
     useEffect(() => {
         const fetchStudents = async () => {
-            const response = await fetch('http://localhost:5000/api/students/all',{
+            const response = await fetch('http://localhost:5000/api/students/all', {
                 headers: {
                     'Authorization': `Bearer ${token}`,
                     'Content-Type': 'application/json'
-                  }
+                }
             });
             const data = await response.json();
             setStudents(data);
         };
 
         fetchStudents();
-    }, []);
+    }, [token]);
 
     const addStudent = () => {
         navigate('/students');
+    };
+
+    const handlePaymentAdded = () => {
+        const fetchStudents = async () => {
+            const response = await fetch('http://localhost:5000/api/students/all', {
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json'
+                }
+            });
+            const data = await response.json();
+            setStudents(data);
+        };
+
+        fetchStudents();
     };
 
     return (
@@ -38,7 +54,7 @@ const StudentList = () => {
                     <h2>Students</h2>
                     <div className="student-list">
                         {students.map((student) => (
-                            <StudentCard key={student.id} student={student} />
+                            <StudentCard key={student._id} student={student} onPaymentAdded={handlePaymentAdded} />
                         ))}
                     </div>
                     <button className="add-student-button" onClick={addStudent}>

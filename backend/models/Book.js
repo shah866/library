@@ -5,7 +5,8 @@ const bookSchema = new mongoose.Schema({
     author: { type: String, required: true },
     category: { type: String, required: true },
     pages: { type: Number, required: true },
-    image: { type: String, required: true }
+    image: { type: String, required: true },
+    isBorrowed: { type: Boolean, default: false }
 });
 
 //  compound index to ensure the combination of title and author is unique
