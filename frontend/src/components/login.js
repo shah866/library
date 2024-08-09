@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './login.css';
-import {useNavigate,Link} from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
+
 const Login = () => {
     const navigate = useNavigate();
 
@@ -36,13 +37,16 @@ const Login = () => {
                 localStorage.setItem('firstName', data.user.firstName);
                 localStorage.setItem('lastName', data.user.lastName);
                 localStorage.setItem('email', data.user.email);
-                localStorage.setItem('isConfirmed',data.user.isConfirmed);
+                localStorage.setItem('isConfirmed', data.user.isConfirmed);
+                localStorage.setItem('role', data.user.role); // Store the role in local storage
 
-               const userId=localStorage.getItem('userId')
+                const userId = localStorage.getItem('userId');
                 setMessage('Login successful');
+
+                // Navigate to the appropriate page based on the user role
                 
-                //navigate(`/profiles/${userId}`);
-                navigate('/bookList');
+                    navigate('/bookList');
+             
             } else {
                 setMessage(data.message);
             }
@@ -64,8 +68,8 @@ const Login = () => {
                     <input type="password" name="password" value={password} onChange={onChange} required />
                 </div>
                 <button className="login-button" type="submit">Login</button>
-                <p>   Don't Have an Account? <Link to="/signup" >SignUp</Link></p>
-             <strong>  {message && <p className="login-message">{message}</p>} </strong> 
+                <p>Don't Have an Account? <Link to="/signup">Sign Up</Link></p>
+                {message && <strong><p className="login-message">{message}</p></strong>}
             </form>
         </div>
     );

@@ -39,7 +39,7 @@ input {
     border-radius: 4px;
 }
 
-.button {
+.buttonn {
     width: 100%;
     padding: 0.75rem;
     border: none;
@@ -51,7 +51,7 @@ input {
     transition: background 0.3s;
 }
 
-.button:hover {
+.buttonn:hover {
     background: #555;
 }
 

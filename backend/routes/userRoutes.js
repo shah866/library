@@ -12,5 +12,8 @@ router.get('/confirm/:token', authController.confirmEmail);
 
 router.post('/resend-confirmation/:userId', authController.resendConfirmationEmail);
 
+router.post('/request-password-reset', authController.requestPasswordReset);
+router.post('/reset-password/:token', authController.resetPassword);
+
 
 module.exports = router;

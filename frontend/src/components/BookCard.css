@@ -18,7 +18,9 @@
     padding: 20px;
     display: flex;
     flex-direction: column;
+
   }
+  
   
   .book-details p {
     margin: 5px 0;

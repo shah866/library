@@ -40,9 +40,9 @@ const BorrowedBooks = () => {
                     <div key={index} className="borrowed-book-card">
                         <p> <strong>BookTilte:</strong> {book.bookTitle}</p>
                         <p><strong>Author:</strong> {book.bookAuthor}</p>
-                        <p><strong>Borrowed By:</strong>  {book.studentName }
-                        <br></br> <strong> Email:</strong> {book.borrowedBy.email}</p>
-                        <p><strong>Enrollment Number:</strong> {book.borrowedBy.enrollmentNumber}</p>
+                        <p><strong>Borrowed By:</strong>  {book.userName }
+                        </p>
+                     
                         <p><strong>Borrowed At:</strong> {new Date(book.borrowedAt).toLocaleDateString()}</p>
                         {book.warning && <p className="warning">{book.warning}</p>}
                     </div>

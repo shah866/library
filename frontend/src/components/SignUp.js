@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate ,Link } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 import './SignUp.css';
 
@@ -8,12 +8,13 @@ const SignUp = () => {
         firstName: '',
         lastName: '',
         email: '',
-        password: ''
+        password: '',
+        role: 'user' // Default role
     });
     const [message, setMessage] = useState('');
     const navigate = useNavigate();
 
-    const { firstName, lastName, email, password } = formData;
+    const { firstName, lastName, email, password, role } = formData;
 
     const onChange = e => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -28,13 +29,13 @@ const SignUp = () => {
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ firstName, lastName, email, password })
+                body: JSON.stringify({ firstName, lastName, email, password, role })
             });
 
             const data = await response.json();
             if (response.ok) {
                 setMessage('Registration successful');
-                alert("User Registration Successful , An email sent to your account please vertify it ");
+                alert("User Registration Successful. An email has been sent to your account. Please verify it.");
                 navigate('/');
             } else {
                 setMessage(data.message.join(', '));
@@ -64,10 +65,16 @@ const SignUp = () => {
                     <label>Password:</label>
                     <input type="password" name="password" value={password} onChange={onChange} required minLength="8" />
                 </div>
-                <button className="button" type="submit">Sign Up</button>
-                <p> Already Have Account? <Link to="/" >SignIn</Link></p>
+                <div className="input-container">
+                    <label>Role:</label>
+                    <select name="role" value={role} onChange={onChange} required>
+                        <option value="user">User</option>
+                        <option value="admin">Admin</option>
+                    </select>
+                </div>
+                <button className="buttonn" type="submit">Sign Up</button>
+                <p>Already Have an Account? <Link to="/">Sign In</Link></p>
                 {message && <p className={`message ${message === 'Registration successful' ? 'success' : 'error'}`}>{message}</p>}
-               
             </form>
         </div>
     );

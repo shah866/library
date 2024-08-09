@@ -10,6 +10,7 @@ const BookList = () => {
     const [books, setBooks] = useState([]);
     const navigate = useNavigate();
     const token = localStorage.getItem('token');
+    const role =localStorage.getItem('role');
 
     useEffect(() => {
         const fetchBooks = async () => {
@@ -45,15 +46,18 @@ const BookList = () => {
               <div className="book-list">
               {availableBooks.length > 0 ? (
                 availableBooks.map((book) => (
-                    <BookCard key={book._id} book={book} />
+                 
+                  book.copies > 0 ? <BookCard key={book._id} book={book} /> : null
+                
                 ))
             ) : (
                 <p>No books available</p>
             )}
               </div>
+              {role==='admin'?
               <button className="add-book-button" onClick={add}>
           +
-        </button>
+        </button>:null}
             </div>
           </div>
         </div>

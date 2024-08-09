@@ -6,6 +6,8 @@ const bodyParser = require('body-parser');
 const userRoutes = require('./routes/userRoutes');
 const bookRoutes = require('./routes/bookRoutes');
 const studentRoutes = require('./routes/studentRoutes');
+const categoryRoutes = require('./routes/category');
+const balanceRoutes = require('./routes/balance');
 const cors = require('cors');
 
 ////////////////////////
@@ -27,7 +29,8 @@ app.use('/api/auth', userRoutes);
 
 app.use('/api/books', bookRoutes);
 app.use('/api/students', studentRoutes);
-
+app.use('/api/categories',categoryRoutes);
+app.use('/api/users', balanceRoutes);
 
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 

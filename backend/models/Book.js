@@ -1,16 +1,42 @@
 const mongoose = require('mongoose');
 
 const bookSchema = new mongoose.Schema({
-    title: { type: String, required: true },
-    author: { type: String, required: true },
-    category: { type: String, required: true },
-    pages: { type: Number, required: true },
-    image: { type: String, required: true },
-    isBorrowed: { type: Boolean, default: false }
+    title: {
+        type: String,
+        required: true,
+    },
+    author: {
+        type: String,
+        required: true,
+    },
+    category: {
+        type: String,
+        required: true,
+    },
+    isbn: {
+        type: String,
+        required: true,
+        unique: true,
+    },
+    copies: {
+        type: Number,
+        required: true,
+        min: 0,
+    },
+    isBorrowed: {
+        type: Boolean,
+        default: false,
+    },
+    pages: {
+        type: Number,
+    },
+    image: {
+        type: String,
+    },
+    price:{
+        type: Number,
+    }
+
 });
 
-//  compound index to ensure the combination of title and author is unique
-bookSchema.index({ title: 1, author: 1 }, { unique: true });
-
-const Book = mongoose.model('Book', bookSchema);
-module.exports = Book;
+module.exports = mongoose.model('Book', bookSchema);

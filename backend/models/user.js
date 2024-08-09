@@ -13,7 +13,11 @@ const userSchema = new mongoose.Schema({
         minlength: [8, 'Password must be at least 8 characters long'] },
         
         isConfirmed: { type: Boolean, default: false },
-        confirmationToken: { type: String }
+        confirmationToken: { type: String },
+        role: { type: String, enum: ['user', 'admin'], default: 'user' },
+        resetPasswordToken: { type: String },
+        resetPasswordExpires: { type: Date },
+        accountBalance: { type: Number, default: 0 } 
    
    
 });

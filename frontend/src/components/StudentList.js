@@ -12,7 +12,7 @@ const StudentList = () => {
 
     useEffect(() => {
         const fetchStudents = async () => {
-            const response = await fetch('http://localhost:5000/api/students/all', {
+            const response = await fetch('http://localhost:5000/api/users/non-admin-users', {
                 headers: {
                     'Authorization': `Bearer ${token}`,
                     'Content-Type': 'application/json'
@@ -29,20 +29,20 @@ const StudentList = () => {
         navigate('/students');
     };
 
-    const handlePaymentAdded = () => {
-        const fetchStudents = async () => {
-            const response = await fetch('http://localhost:5000/api/students/all', {
-                headers: {
-                    'Authorization': `Bearer ${token}`,
-                    'Content-Type': 'application/json'
-                }
-            });
-            const data = await response.json();
-            setStudents(data);
-        };
+    // const handlePaymentAdded = () => {
+    //     const fetchStudents = async () => {
+    //         const response = await fetch('http://localhost:5000/api/students/all', {
+    //             headers: {
+    //                 'Authorization': `Bearer ${token}`,
+    //                 'Content-Type': 'application/json'
+    //             }
+    //         });
+    //         const data = await response.json();
+    //         setStudents(data);
+    //     };
 
-        fetchStudents();
-    };
+    //     fetchStudents();
+    // };
 
     return (
         <div className="appp">
@@ -51,15 +51,16 @@ const StudentList = () => {
                 <Header />
                 <div className="student-section">
                     <br></br>
-                    <h2>Students</h2>
+                    <h2>Users</h2>
                     <div className="student-list">
                         {students.map((student) => (
-                            <StudentCard key={student._id} student={student} onPaymentAdded={handlePaymentAdded} />
+                            <StudentCard key={student._id} student={student}  />
                         ))}
                     </div>
+{/*                     
                     <button className="add-student-button" onClick={addStudent}>
                         +
-                    </button>
+                    </button> */}
                 </div>
             </div>
         </div>

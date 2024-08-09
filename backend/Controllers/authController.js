@@ -15,8 +15,9 @@ const transporter = nodemailer.createTransport({
 
 
 // Registration controller
+// Registration controller
 exports.register = async (req, res) => {
-    const { firstName, lastName, email, password } = req.body;
+    const { firstName, lastName, email, password, role } = req.body;
 
     try {
         // Check if the user already exists
@@ -37,7 +38,8 @@ exports.register = async (req, res) => {
             lastName,
             email,
             password: hashedPassword,
-            confirmationToken
+            confirmationToken,
+            role: role || 'user' // Default role to 'user' if not provided
         });
 
         // Save the user
@@ -123,6 +125,7 @@ exports.resendConfirmationEmail = async (req, res) => {
 };
 
 // Login controller
+// Login controller
 exports.login = async (req, res) => {
     const { email, password } = req.body;
 
@@ -133,12 +136,84 @@ exports.login = async (req, res) => {
         const isMatch = await bcrypt.compare(password, user.password);
         if (!isMatch) return res.status(400).json({ message: 'Invalid credentials' });
 
-        const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '7h' });
+        const token = jwt.sign({ id: user._id, role: user.role }, process.env.JWT_SECRET, { expiresIn: '7h' });
 
-        res.json({ token, user: { id: user._id, firstName: user.firstName, lastName: user.lastName, email: user.email , 
-            isConfirmed: user.isConfirmed } });
+        res.json({ 
+            token, 
+            user: { 
+                id: user._id, 
+                firstName: user.firstName, 
+                lastName: user.lastName, 
+                email: user.email, 
+                isConfirmed: user.isConfirmed,
+                role: user.role
+            }
+        });
     } catch (error) {
         console.error('Error during login:', error.message);
         res.status(500).json({ message: error.message });
     }
 };
+
+
+exports.requestPasswordReset = async (req, res) => {
+    const { email } = req.body;
+
+    try {
+        const user = await User.findOne({ email });
+        if (!user) return res.status(404).json({ message: 'User not found' });
+
+        const resetToken = crypto.randomBytes(20).toString('hex');
+        user.resetPasswordToken = resetToken;
+        user.resetPasswordExpires = Date.now() + 3600000; // 1 hour
+
+        await user.save();
+
+        const resetUrl = `http://localhost:3000/reset-password/${resetToken}`;
+        const mailOptions = {
+            from: process.env.EMAIL,
+            to: user.email,
+            subject: 'Password Reset',
+            html: `<p>Hi ${user.firstName},</p><p>Click the link below to reset your password:</p><a href="${resetUrl}">Reset Password</a>`
+        };
+
+        transporter.sendMail(mailOptions, (error, info) => {
+            if (error) return res.status(500).json({ message: 'Error sending password reset email' });
+            res.status(200).json({ message: 'Password reset email sent' });
+        });
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};
+
+exports.resetPassword = async (req, res) => {
+    const { token } = req.params;
+    const { oldPassword, newPassword } = req.body;
+
+    try {
+        const user = await User.findOne({ 
+            resetPasswordToken: token, 
+            resetPasswordExpires: { $gt: Date.now() }
+        });
+
+        if (!user) return res.status(400).json({ message: 'Invalid or expired token' });
+
+        // Validate the old password
+        const isMatch = await bcrypt.compare(oldPassword, user.password);
+        if (!isMatch) return res.status(400).json({ message: 'Old password is incorrect' });
+
+        // Hash the new password and update the user
+        const salt = await bcrypt.genSalt(10);
+        user.password = await bcrypt.hash(newPassword, salt);
+        user.resetPasswordToken = null;
+        user.resetPasswordExpires = null;
+
+        await user.save();
+
+        res.status(200).json({ message: 'Password has been reset successfully' });
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};
+
+
